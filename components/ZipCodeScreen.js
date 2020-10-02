@@ -12,14 +12,15 @@ const availableZipItems = [
     { place: 'Chonburi', code: '20000' },
     { place: 'Phuket', code: '83120' },
 ]
-
 const ZipItem = ({ place, code, navigation }) => (
     <TouchableHighlight onPress={() => navigation.navigate('Weather', { zipCode: code })}>
         <View>
+        <Text style={styles.bigBlue}>____________________</Text>
             <View style={styles.cover}>
                 <Text style={styles.rewText}>{place}</Text>
                 <Text style={styles.rewText}>{code}</Text>
             </View>
+            <Text style={styles.bigBlue}>____________________</Text>
         </View>
     </TouchableHighlight>
 )
@@ -30,15 +31,14 @@ const _keyExtractor = item => item.code
 export default function ZipCodeScreen() {
     const navigation = useNavigation()
     return (
-        <View style={styles.center}>
-
-            <FlatList
-                data={availableZipItems}
-                keyExtractor={_keyExtractor}
-                renderItem={({ item }) => <ZipItem {...item} navigation={navigation} />}
-            />
-            <StatusBar style="auto" />
-        </View>
+            <View style={styles.center}>
+                <FlatList
+                    data={availableZipItems}
+                    keyExtractor={_keyExtractor}
+                    renderItem={({ item }) => <ZipItem {...item} navigation={navigation} />}
+                />
+                <StatusBar style="auto" />
+            </View>
     );
 
 }
@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#FFF',
         marginTop: 20,
+    },
+    backdrop: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
     },
     simsan: {
         backgroundColor: 'blue',
@@ -63,8 +68,8 @@ const styles = StyleSheet.create({
         color: 'blue',
         fontWeight: 'bold',
         fontSize: 30,
-      },
-      cover: {
+    },
+    cover: {
         backgroundColor: 'red',
         width: '100%',
         height: 200,
